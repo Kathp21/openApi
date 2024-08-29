@@ -29,7 +29,7 @@ paths:
                   properties:
                     date:
                       type: string
-                      example: 2024-8-20
+                      example: '2024-8-20'
                     time_blocks:
                       type: array
                       items:
@@ -114,6 +114,24 @@ paths:
                   hoursDj: 
                     type: integer
                     example: 3
+                  date:
+                    type: string
+                    example: "2024-08-20"
+                  start_time:
+                    type: string
+                    example: "17:00"
+                  ceremonyStartTime:
+                    type: integer
+                    example: 1
+                  ceremonyEndTime: 
+                    type: integer
+                    example: 3
+                  receptionStartTime: 
+                    type: integer
+                    example: 6
+                  receptionEndTime:
+                    type: integer
+                    example: 10                  
             description: Information client filled out in get a quote form
     responses:
       '200':
@@ -136,6 +154,18 @@ paths:
                 hoursPhotoBooth:
                   type: integer
                 hoursDj:
+                  type: integer
+                date:
+                  type: string
+                start_time:
+                  type: string
+                ceremonyStartTime:
+                  type: integer
+                ceremonyEndTime:
+                  type: integer
+                receptionStartTime:
+                  type: integer
+                receptionEndTime:
                   type: integer
   /api/galleryList:
     get:

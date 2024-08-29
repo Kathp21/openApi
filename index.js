@@ -45,7 +45,7 @@ app.get('/api/album/:album_id', (req, res) => {
 })
 
 app.post('/api/getQuote', (req, res) => {
-    const { client_name, email, phoneNumber, numberOfGuests, eventTypes, hoursPhotoBooth, hoursDj } = req.body
+    const { client_name, email, phoneNumber, numberOfGuests, eventTypes, hoursPhotoBooth, hoursDj, date, start_time, ceremonyStartTime, ceremonyEndTime, receptionStartTime, receptionEndTime } = req.body
 
     res.json ({
         client_name,
@@ -54,7 +54,13 @@ app.post('/api/getQuote', (req, res) => {
         numberOfGuests,
         eventTypes,
         hoursPhotoBooth,
-        hoursDj
+        hoursDj,
+        date,
+        start_time,
+        ceremonyStartTime,
+        ceremonyEndTime,
+        receptionEndTime,
+        receptionStartTime
     })
 })
 
