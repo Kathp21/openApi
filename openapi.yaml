@@ -1,0 +1,176 @@
+openapi: 3.0.1
+info:
+  title: My API
+  version: 1.0.0
+  description: A simple API for photo booth rental
+servers:
+  - url: http://localhost:3000
+paths:
+  /api/bookingCalendar:
+    get:
+      summary: Retrieve a list of availability
+      parameters:
+        - in: query
+          name: service_type
+          require: true
+          schema:
+            type: string
+            example: 'photo booth'
+          description: Filter availability by service type
+      responses:
+        '200':
+          description: A list of day availability
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    date:
+                      type: string
+                      example: 2024-8-20
+                    time_blocks:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          start_time:
+                            type: string
+                            example: '14:00'
+                          end_time:
+                            type: string
+                            example: '20:00'
+  /api/album/{album_id}:
+    get:
+      summary: Retrieve photo URLs for an album
+      parameters:
+        - in: path
+          name: album_id
+          required: true
+          schema:
+            type: integer
+            example: 239843
+          description: The ID of the album to retrieve
+        - in: header
+          name: password
+          required: true
+          schema:
+            type: string
+            example: 'hdshisfhsdlh'
+          description: The password required to access the album
+      responses:
+        '200':
+          description: A specific photo album
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  album_id:
+                    type: integer
+                    example: 239843
+                  album_title:
+                    type: string
+                    example: "Brian's birthday"
+                  photo_urls:
+                    type: array
+                    items:
+                      type: string
+                      example: 'http://example.com/photos/1.jpg'
+        '401':
+          description: Unauthorized - Invalid password
+        '404':
+          description: Not found - Album ID does not exist
+  /api/getQuote:
+    post:
+      summary: Received information for get a quote and send it to Brian's email
+      requestBody:
+        require: true
+        content:
+          application/json:
+            schema:
+              type: object
+              items:
+                properties:
+                  client_name: 
+                    type: string
+                    example: 'Kelvin'
+                  email:
+                    type: string
+                    example: 'kelvin@mail.com'
+                  phoneNumber:
+                    type: string
+                    example: '604-454-7793'
+                  numberOfGuests:
+                    type: integer
+                    example: 35
+                  eventTypes:
+                    type: string
+                    example: 'Birthday'
+                  hoursPhotoBooth:
+                    type: integer
+                    example: 2
+                  hoursDj: 
+                    type: integer
+                    example: 3
+            description: Information client filled out in get a quote form
+    responses:
+      '200':
+        description: A quote response
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                client_name:
+                  type: string
+                email:
+                  type: string
+                phoneNumber:
+                  type: string
+                numberOfGuests:
+                  type: integer
+                eventTypes:
+                  type: string
+                hoursPhotoBooth:
+                  type: integer
+                hoursDj:
+                  type: integer
+  /api/galleryList:
+    get:
+      summary: Retrieve a list of album 
+      responses:
+        '200':
+          description: Shows list of ablum 
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    thumbnail_image_url:
+                      type: string
+                      example: 'http://example.com/photos/1.jpg'
+                    background_image_url:
+                      type: string
+                      example: 'http://example.com/photos/1.jpg'
+                    album_title:
+                      type: string
+                      example: "Kel's birthday"
+                    event_date:
+                      type: string
+                      example: '2024-06-09'
+                    event_type:
+                      type: string
+                      example: 'Birthday'
+                    album_id:
+                      type: integer
+                      example: 239843
+
+
+
+
+
+  
